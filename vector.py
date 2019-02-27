@@ -25,6 +25,25 @@ function.
 from pygame import Vector2
 import pygame
 
+class Vector2D(Vector2):
+    def __init__(self, x, y):
+        super().__init__(x, y)
+    
+    def normalize(self):
+        return Vector2D(self.x/self.length(), self.y/self.length())
+
+    def reflect(self, input_vector):
+        input_vector.reflect_ip()
+        return input_vector
+
+    def as_tuple(self):
+        return round(self.x), round(self.y)
+
+    def __truediv__(self, val):
+        return Vector2D(self.x/val, self.y/val)
+
+    def __mul__(self, val):
+        return Vector2D(self.x*val, self.y*val)
 
 def intersect_rectangle_circle(rec_pos, sx, sy,
                                circle_pos, circle_radius, circle_speed):
@@ -90,10 +109,11 @@ def intersect_circles(circle_a_position, circle_a_radius,
     dp1p2 = circle_b_position - circle_a_position
 
     if circle_a_radius + circle_b_radius >= abs(dp1p2.x + dp1p2.y):
+        print("hit")
         return dp1p2.normalize()
     else:
+        print("not hit")
         return False
-
 
 def example_code():
     """ Example showing the use of the above code. """
