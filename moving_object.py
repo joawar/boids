@@ -42,6 +42,7 @@ class Moving_Object(Visible_Object):
         self.rect.x = self.pos.x
         self.rect.y = self.pos.y
         
+        
     def avoid_border(self):
         width, height = SCREEN_RES
         ret = Vector2D(0,0)
