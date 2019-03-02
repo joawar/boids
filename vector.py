@@ -26,19 +26,19 @@ from pygame import Vector2
 import pygame
 
 class Vector2D(Vector2):
+    """Extension of pygame's Vector2 class"""
     def __init__(self, x, y):
         super().__init__(x, y)
     
+    # had to overwrite normalize so it returns a Vector2D, not Vector2
     def normalize(self):
         return Vector2D(self.x/self.length(), self.y/self.length())
 
-    def reflect(self, input_vector):
-        input_vector.reflect_ip()
-        return input_vector
-
+    # added new method which returns the coordinates of the vector as a tuple
     def as_tuple(self):
         return round(self.x), round(self.y)
 
+    # for some reason an error occured if truediv and mul were not overwritten
     def __truediv__(self, val):
         return Vector2D(self.x/val, self.y/val)
 
