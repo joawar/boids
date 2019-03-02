@@ -16,7 +16,9 @@ class Hoik(Moving_Object):
     def update(self, obstacle_list):
         super().update(obstacle_list)
 
-    def find_nearest_boid(self):    
+    def find_nearest_boid(self):
+        """Returns the position of the nearest boid as a Vector2D
+        """
         nearest_boid_pos = Vector2D(0,0)
         best_proximity = 100000 # big number
         boid_list = self.boid_group.sprites()
@@ -38,6 +40,8 @@ class Hoik(Moving_Object):
         super().set_velocity(obstacle_list)
     
     def separation(self): 
+        """Returns a velocity that makes the hoiks not crash into each other
+        """
         c = Vector2D(0,0) 
         hoik_list = self.hoik_group.sprites()
         for hoik in hoik_list:

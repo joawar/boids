@@ -43,6 +43,8 @@ class Moving_Object(Visible_Object):
         self.rect.y = self.pos.y
         
     def avoid_border(self):
+        """Returns a velocity which will turn the moving object away from the border
+        """
         width, height = SCREEN_RES
         ret = Vector2D(0,0)
         if self.pos.x > width - width * BORDER_SCREEN_RATIO:
