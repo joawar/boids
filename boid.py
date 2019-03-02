@@ -12,11 +12,14 @@ class Boid(Moving_Object):
         self.rect = self.image.get_rect()
         self.rect.x = self.pos.x
         self.rect.y = self.pos.y
+        self.max_speed = BOID_MAX_SPEED
         
     def update(self, obstacle_list):
         super().update(obstacle_list)
 
     def cohesion(self): # based on pseudocode from kfish.org/boids/pseudocode.html
+        """Returns a velcoity that makes the boids flocks towards a common center
+        """
         perceived_centre = Vector2D(0,0)
         nearby_boid_count = 0
         boid_list = self.boid_group.sprites()
@@ -32,6 +35,8 @@ class Boid(Moving_Object):
         return (perceived_centre - self.pos) * COHESION_POWER
 
     def alignment(self): # based on pseudocode from kfish.org/boids/pseudocode.html
+        """Returns a velocity that makes the boids have a common velocity
+        """
         perceived_velocity = Vector2D(0,0)
         nearby_boid_count = 0
         boid_list = self.boid_group.sprites()
@@ -48,13 +53,12 @@ class Boid(Moving_Object):
     
     def set_velocity(self, obstacle_list): 
         self.velocity += self.cohesion()
-        self.velocity += self.separation()
         self.velocity += self.alignment()
-        self.velocity += self.avoid_border()
-        self.velocity += self.avoid_obstacle(obstacle_list)
-        self.limit_velocity(BOID_MAX_SPEED)
+        super().set_velocity(obstacle_list)
     
     def separation(self): 
+        """Returns a velocity that makes the boids not crash into each other
+        """
         c = Vector2D(0,0) 
         boid_list = self.boid_group.sprites()
         for boid in boid_list:
@@ -64,7 +68,6 @@ class Boid(Moving_Object):
         return c * SEPARATION_POWER
 
 if __name__ == "__main__":
-    test = Vector2D(1,2)
-    test2 = Vector2D(3,4)
-    test3 = test + test2
-    print(test3.y)
+    test = pygame.math.Vector2(1,2)
+    test = test / 2
+    print(test)

@@ -11,11 +11,12 @@ class Hoik(Moving_Object):
         self.rect = self.image.get_rect()
         self.rect.x = self.pos.x
         self.rect.y = self.pos.y
+        self.max_speed = HOIK_MAX_SPEED
 
     def update(self, obstacle_list):
         super().update(obstacle_list)
 
-    def find_nearest_boid(self):
+    def find_nearest_boid(self):    
         nearest_boid_pos = Vector2D(0,0)
         best_proximity = 100000 # big number
         boid_list = self.boid_group.sprites()
@@ -34,10 +35,7 @@ class Hoik(Moving_Object):
             self.velocity += (nearest_boid_pos - self.pos).normalize() * TOWARDS_PREY_POWER
         except:
             pass
-        self.velocity += self.avoid_border()
-        self.velocity += self.avoid_obstacle(obstacle_list)
-        self.velocity += self.separation()
-        self.limit_velocity(HOIK_MAX_SPEED)
+        super().set_velocity(obstacle_list)
     
     def separation(self): 
         c = Vector2D(0,0) 
