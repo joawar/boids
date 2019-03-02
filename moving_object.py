@@ -61,3 +61,9 @@ class Moving_Object(Visible_Object):
             if (self.pos - obstacle.pos).length() < SIGHT_RADIUS + obstacle.size:
                 c -= (obstacle.pos - self.pos).normalize()
         return c * AVOID_OBSTACLE_POWER
+    
+    def set_velocity(self, obstacle_list):
+        self.velocity += self.avoid_border()
+        self.velocity += self.avoid_obstacle(obstacle_list)
+        self.velocity += self.separation()
+        self.limit_velocity(self.max_speed)
