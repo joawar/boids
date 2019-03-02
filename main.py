@@ -10,7 +10,6 @@ from vector import Vector2D
 import pygame
 
 
-print("Left click to spawn boids, right click to spawn hoiks.")
 pygame.init()
 screen = pygame.display.set_mode(SCREEN_RES)
 clock = pygame.time.Clock()
