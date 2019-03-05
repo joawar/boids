@@ -1,0 +1,62 @@
+@startuml Boids
+Visible_Object <|-- Moving_Object
+Moving_Object <|-- Boid
+Moving_Object <|-- Hoik
+
+
+note bottom of Vector2D : This extends pygame.math.Vector2
+class Vector2D{
+    as_tuple()
+}
+
+class Visible_Object{
+    pos: Vector2D
+    reference_direction: Vector2D
+    rotate_image()
+}
+
+class Moving_Object{
+    {static} moving_object_group: pygame.sprite.Group
+    {static} hoik_group: pygame.sprite.Group
+    {static} boid_group: pygame.sprite.Group
+    velocity: Vector2D
+    color: tuple
+    screen: pygame.Surface
+    radius: int
+    acceleration: Vector2D
+
+    update()
+    limit_velocity()
+    accelerate()
+    crash()
+    move()
+    avoid_border()
+    avoid_obstacle()
+    set_velocity()
+}
+
+class Boid{
+    image: pygame.Surface
+    rect: pygame.Rect
+    max_speed: int
+
+    update()
+    cohesion()
+    alignment()
+    set_velocity()
+    separation()
+
+}
+
+class Hoik{
+    image: pygame.Surface
+    rect: pygame.Rect
+    max_speed: int
+
+    update()
+    find_nearest_boid()
+    set_velocity()
+    separation()
+}
+
+@enduml
