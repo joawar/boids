@@ -20,8 +20,8 @@ class Moving_Object(Visible_Object):
     def update(self, obstacle_list):
         self.set_velocity(obstacle_list)
         self.move()
-        rotation = self.velocity.angle_to(self.reference_direction)
-        self.rotate_image(rotation)
+        rotation_angle = self.velocity.angle_to(self.reference_direction)
+        self.rotate_image(rotation_angle)
             
     def limit_velocity(self, max_speed):
         if self.velocity.length() > max_speed:

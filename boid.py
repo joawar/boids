@@ -66,8 +66,3 @@ class Boid(Moving_Object):
                 if (boid.pos - self.pos).length() < SIGHT_RADIUS/2:
                     c -= boid.pos - self.pos
         return c * SEPARATION_POWER
-
-if __name__ == "__main__":
-    test = pygame.math.Vector2(1,2)
-    test = test / 2
-    print(test)

@@ -2,17 +2,19 @@
 Visible_Object <|-- Moving_Object
 Moving_Object <|-- Boid
 Moving_Object <|-- Hoik
-
-
-note bottom of Vector2D : This extends pygame.math.Vector2
-class Vector2D{
-    as_tuple()
-}
+Visible_Object <|-- Obstacle
 
 class Visible_Object{
     pos: Vector2D
     reference_direction: Vector2D
     rotate_image()
+}
+
+class Obstacle{
+    {static} obstacle_group: pygame.sprite.Group
+    size: int
+    image: pygame.Surface
+    rect: pygame.Rect
 }
 
 class Moving_Object{

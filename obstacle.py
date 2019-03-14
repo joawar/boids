@@ -14,7 +14,3 @@ class Obstacle(Visible_Object):
         self.obstacle_group.add(self)
         self.rect.x = self.pos.x
         self.rect.y = self.pos.y
-
-if __name__ == "__main__":
-    test_vector = pygame.math.Vector2D(1,2)
-    print(test_vector.as_tuple())
